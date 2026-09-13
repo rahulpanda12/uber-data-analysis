@@ -7,10 +7,7 @@ df = pd.read_csv("data/processed/uber_cleaned.csv")
 # Convert START_DATE to datetime
 df["START_DATE"] = pd.to_datetime(df["START_DATE"])
 
-
-# =====================================
 # 1. Trips by Day of Week
-# =====================================
 
 day_order = [
     "Monday",
@@ -43,10 +40,7 @@ plt.savefig("reports/trips_by_day.png")
 plt.show()
 plt.close()
 
-
-# =====================================
 # 2. Trips by Month
-# =====================================
 
 month_counts = df["MONTH"].value_counts().sort_index()
 
@@ -68,10 +62,7 @@ plt.savefig("reports/trips_by_month.png")
 plt.show()
 plt.close()
 
-
-# =====================================
 # 3. Trips by Hour
-# =====================================
 
 hour_counts = df["HOUR"].value_counts().sort_index()
 
