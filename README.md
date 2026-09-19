@@ -1,386 +1,298 @@
-\# Uber Data Analysis
+# 🚖 Uber Data Analysis
 
+An end-to-end Data Analytics project that transforms messy Uber trip data into meaningful business insights using **Python, Pandas, NumPy, Matplotlib, MySQL, and SQL**.
 
+---
 
-An end-to-end data analysis project using Python, Pandas, NumPy, Matplotlib, MySQL, and SQL to clean, explore, and extract insights from Uber trip data.
+## 📌 Project Overview
 
+Real-world datasets are rarely clean. This project focuses on:
 
+- Cleaning and validating raw data
+- Handling missing values and duplicates
+- Feature engineering
+- Exploratory Data Analysis (EDA)
+- Data visualization
+- SQL-based analysis using MySQL
+- Extracting business insights
 
-\## Project Objective
+### Workflow
 
+```text
+Raw CSV
+   ↓
+Data Cleaning
+   ↓
+Feature Engineering
+   ↓
+Exploratory Data Analysis
+   ↓
+Visualizations
+   ↓
+MySQL Database
+   ↓
+SQL Analysis
+   ↓
+Business Insights
+```
 
+---
 
-The goal of this project is to transform messy raw Uber trip data into clean, structured data and use Python and SQL to identify meaningful patterns in trip behavior.
+## 📂 Dataset Information
 
+The dataset contains Uber trip records with:
 
+- Start & End Date/Time
+- Trip Category
+- Start & Stop Locations
+- Distance (Miles)
+- Trip Purpose
 
-The project covers the complete data analysis workflow:
+### Dataset Summary
 
+| Metric | Value |
+|----------|---------|
+| Original Records | 1,156 |
+| Clean Records | 1,154 |
+| Original Columns | 7 |
+| Final Columns | 11 |
 
+---
 
-Raw Data → Data Cleaning → Feature Engineering → EDA → MySQL → SQL Analysis → Insights
+## 🧹 Data Cleaning
 
+The raw dataset contained:
 
+- Missing values
+- Duplicate records
+- Inconsistent location names
+- Mixed date formats
+- Non-trip summary rows
 
-\## Dataset
+Cleaning steps:
 
+- Removed duplicate records
+- Removed non-trip rows
+- Handled missing values
+- Standardized locations
+- Parsed datetime columns
+- Filled missing purposes as `Unknown`
 
+---
 
-The dataset contains Uber trip records with information such as:
+## ⚙️ Feature Engineering
 
+Additional features created:
 
+| Feature | Description |
+|----------|-------------|
+| MONTH | Trip month |
+| DAY_OF_WEEK | Day name |
+| HOUR | Trip hour |
+| DISTANCE_TYPE | Short / Medium / Long |
 
-\- Start and end date/time
+### Distance Categories
 
-\- Trip category
+| Type | Miles |
+|--------|--------|
+| Short | ≤ 5 |
+| Medium | 5–15 |
+| Long | > 15 |
 
-\- Start and stop locations
+---
 
-\- Distance in miles
-
-\- Trip purpose
-
-
-
-The original dataset contained 1,156 rows and 7 columns.
-
-
-
-After cleaning, the dataset contains 1,154 valid records and 11 columns.
-
-
-
-\## Data Cleaning
-
-
-
-The raw dataset contained missing values, duplicate records, inconsistent location names, mixed date formats, and a non-trip `Totals` row.
-
-
-
-The cleaning process included:
-
-
-
-\- Removing the non-trip `Totals` row
-
-\- Removing duplicate records
-
-\- Handling missing values
-
-\- Standardizing inconsistent location names
-
-\- Parsing mixed date formats
-
-\- Filling missing trip purposes as `Unknown`
-
-\- Removing records missing essential fields
-
-\- Creating additional analytical features
-
-
-
-\### Feature Engineering
-
-
-
-The following features were created:
-
-
-
-\- `MONTH`
-
-\- `DAY\_OF\_WEEK`
-
-\- `HOUR`
-
-\- `DISTANCE\_TYPE`
-
-
-
-Distance was categorized as:
-
-
-
-\- Short: ≤ 5 miles
-
-\- Medium: 5–15 miles
-
-\- Long: > 15 miles
-
-
-
-\## Exploratory Data Analysis
-
-
+## 📊 Exploratory Data Analysis
 
 The project analyzes:
 
+- Business vs Personal Trips
+- Trip Purposes
+- Start & Stop Locations
+- Common Routes
+- Distance Patterns
+- Outliers
+- Hourly Trends
+- Weekly Trends
+- Monthly Trends
 
+---
 
-\- Business vs Personal trips
+## 🔍 Key Insights
 
-\- Trip purposes
+### Trip Categories
 
-\- Start and stop locations
+| Category | Trips | Percentage |
+|-----------|--------|-------------|
+| Business | 1077 | 93.33% |
+| Personal | 77 | 6.67% |
 
-\- Common routes
+---
 
-\- Distance distribution
+### Trip Purpose
 
-\- Distance outliers
+Top recorded purposes:
 
-\- Trips by hour
+- Meeting → 186
+- Meal/Entertain → 160
+- Errand/Supplies → 128
+- Customer Visit → 101
 
-\- Trips by day of week
+⚠️ 43.5% of trips had unknown purposes.
 
-\- Trips by month
+---
 
-\- Average distance by hour
+### Location Insights
 
+Most active locations:
 
+| Location | Total Activity |
+|------------|----------------|
+| Cary | 403 |
+| Unknown Location | 297 |
+| Morrisville | 169 |
+| Whitebridge | 133 |
 
-\## Key Findings
-
-
-
-\### Trip Category
-
-
-
-\- Business trips: 1,077 (93.33%)
-
-\- Personal trips: 77 (6.67%)
-
-
-
-The dataset is heavily dominated by business-related trips.
-
-
-
-\### Trip Purpose
-
-
-
-The most common recorded purpose was:
-
-
-
-\- Meeting: 186 trips
-
-\- Meal/Entertain: 160 trips
-
-\- Errand/Supplies: 128 trips
-
-\- Customer Visit: 101 trips
-
-
-
-However, 502 trips (43.50%) have an unknown purpose, which is an important data-quality limitation.
-
-
-
-\### Locations
-
-
-
-Cary had the highest overall start/stop activity with 403 recorded activities.
-
-
-
-The most common known route was:
-
-
-
-\- Morrisville → Cary: 75 trips
-
-\- Cary → Morrisville: 67 trips
-
-
-
-\### Distance
-
-
-
-\- Average trip distance: 10.57 miles
-
-\- Median trip distance: 6 miles
-
-\- Maximum trip distance: 310.3 miles
-
-
-
-Most trips were Short or Medium distance, while a relatively small number of long trips contributed substantially to total mileage.
-
-
-
-\### Time
-
-
-
-The busiest recorded hour was 3 PM with 98 trips.
-
-
-
-Friday had the highest number of recorded trips with 206.
-
-
-
-December had the highest monthly trip count with 146.
-
-
-
-These results describe the trips contained in this dataset and should not be interpreted as overall Uber demand.
-
-
-
-\## SQL Analysis
-
-
-
-The cleaned dataset was imported into MySQL and analyzed using SQL.
-
-
-
-SQL scripts are organized into:
-
-
-
-\- `schema.sql`
-
-\- `business\_analysis.sql`
-
-\- `purpose\_analysis.sql`
-
-\- `location\_analysis.sql`
-
-\- `distance\_analysis.sql`
-
-\- `time\_analysis.sql`
-
-
-
-The SQL analysis uses operations such as:
-
-
-
-\- `GROUP BY`
-
-\- `COUNT`
-
-\- `SUM`
-
-\- `AVG`
-
-\- `ROUND`
-
-\- `ORDER BY`
-
-\- `WHERE`
-
-\- Subqueries
-
-\- `UNION ALL`
-
-
-
-\## Visualizations
-
-
-
-The project generates visualizations for:
-
-
-
-\- Trips by day
-
-\- Trips by hour
-
-\- Trips by month
-
-\- Trip distance distribution
-
-\- Average trip distance by hour
-
-
-
-All generated charts are stored in the `reports/` directory.
-
-
-
-\## Project Structure
-
-
+Most common route:
 
 ```text
+Morrisville → Cary (75 trips)
+Cary → Morrisville (67 trips)
+```
 
+---
+
+### Distance Insights
+
+| Metric | Value |
+|----------|---------|
+| Average Distance | 10.57 miles |
+| Median Distance | 6 miles |
+| Maximum Distance | 310.3 miles |
+
+Most trips were Short or Medium distance.
+
+---
+
+### Time Insights
+
+- Peak Hour: **3 PM (98 trips)**
+- Busiest Day: **Friday (206 trips)**
+- Peak Month: **December (146 trips)**
+
+---
+
+## 🗄 SQL Analysis
+
+The cleaned dataset was imported into MySQL.
+
+SQL analysis included:
+
+- GROUP BY
+- Aggregations
+- Filtering
+- Subqueries
+- UNION ALL
+- Route Analysis
+
+SQL Scripts:
+
+```text
+sql/
+├── schema.sql
+├── business_analysis.sql
+├── purpose_analysis.sql
+├── location_analysis.sql
+├── distance_analysis.sql
+└── time_analysis.sql
+```
+
+---
+
+## 📈 Visualizations
+
+Generated charts:
+
+- Trips by Hour
+- Trips by Day
+- Trips by Month
+- Distance Distribution
+- Average Distance by Hour
+
+Stored inside:
+
+```text
+reports/
+```
+
+---
+
+## 🛠 Tech Stack
+
+### Programming
+
+- Python
+- SQL
+
+### Libraries
+
+- Pandas
+- NumPy
+- Matplotlib
+
+### Database
+
+- MySQL
+
+### Tools
+
+- VS Code
+- MySQL Workbench
+- Git
+- GitHub
+
+---
+
+## 📁 Project Structure
+
+```text
 uber-data-analysis/
-
 │
-
 ├── data/
-
-│   ├── raw/
-
-│   └── processed/
-
-│       └── uber\_cleaned.csv
-
-│
-
 ├── reports/
-
-│   ├── trips\_by\_day.png
-
-│   ├── trips\_by\_hour.png
-
-│   ├── trips\_by\_month.png
-
-│   ├── distance\_boxplot.png
-
-│   └── avg\_distance\_by\_hour.png
-
-│
-
 ├── src/
-
-│   ├── data\_cleaning.py
-
-│   ├── eda.py
-
-│   ├── business\_analysis.py
-
-│   ├── purpose\_analysis.py
-
-│   ├── location\_analysis.py
-
-│   ├── distance\_analysis.py
-
-│   └── time\_analysis.py
-
-│
-
 ├── sql/
+├── README.md
+└── .gitignore
+```
 
-│   ├── schema.sql
+---
 
-│   ├── business\_analysis.sql
+## 🎯 Skills Demonstrated
 
-│   ├── purpose\_analysis.sql
+- Data Cleaning
+- Feature Engineering
+- Exploratory Data Analysis
+- SQL Query Writing
+- Data Visualization
+- Database Management
+- Business Insight Generation
+- Git & GitHub Workflow
 
-│   ├── location\_analysis.sql
+---
 
-│   ├── distance\_analysis.sql
+## ⚠️ Limitations
 
-│   └── time\_analysis.sql
+- 43.5% trip purposes are unknown.
+- Dataset does not represent all Uber demand.
+- Some locations are ambiguous.
+- Long trips affect average-distance calculations.
 
-│
+---
 
-├── download\_data.py
+## 👨‍💻 Author
 
-├── data\_inspection.py
+**Rahul Panda**
 
-├── .gitignore
+B.Tech CSE | Data Analytics & Data Science Enthusiast
 
-└── README.md
-
+GitHub: https://github.com/rahulpanda12
